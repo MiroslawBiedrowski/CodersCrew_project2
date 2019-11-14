@@ -25,4 +25,13 @@ function populateList(plates = [], platesList) {
     }).join('');
 }
 
+function toggleDone(e) {
+    if (!e.target.matches('input')) return;
+    const el = e.target;
+    const index = el.dataset.index;
+    tasks[index].done = !tasks[index].done;
+    populateList(tasks, taskList)
+}
+
 addTasks.addEventListener('submit', addTask);
+taskList.addEventListener('click', toggleDone)

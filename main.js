@@ -1,6 +1,6 @@
 const addTasks = document.querySelector('.add-to-do');
 const taskList = document.querySelector('.to-do-list');
-const tasks = [];
+const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 function addTask(e) {
     e.preventDefault();
@@ -11,6 +11,7 @@ function addTask(e) {
     }
     tasks.push(task);
     populateList(tasks, taskList);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
     this.querySelector('[name=to-do]').value = '';
 }
 
@@ -30,8 +31,10 @@ function toggleDone(e) {
     const el = e.target;
     const index = el.dataset.index;
     tasks[index].done = !tasks[index].done;
+    localStorage.setItem('tasks', JSON.stringify(tasks));
     populateList(tasks, taskList)
 }
 
 addTasks.addEventListener('submit', addTask);
-taskList.addEventListener('click', toggleDone)
+taskList.addEventListener('click', toggleDone);
+populateList(tasks, taskList);

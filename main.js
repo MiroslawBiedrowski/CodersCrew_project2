@@ -8,7 +8,7 @@ function addTask(e) {
     const task = {
         text,
         done: false,
-    }
+    };
     tasks.push(task);
     populateList(tasks, taskList);
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -20,7 +20,8 @@ function populateList(plates = [], platesList) {
         return `
         <li>
             <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
-            <label for="item${i}">${plate.text}</label>        
+            <label for="item${i}">${plate.text}</label>
+            <button class="btn-rem">Usuń</button>        
          </li>
         `;
     }).join('');
@@ -35,6 +36,11 @@ function toggleDone(e) {
     populateList(tasks, taskList)
 }
 
+function removeDone(e) {
+    console.log(e.target.parentNode);
+}
+
 addTasks.addEventListener('submit', addTask);
 taskList.addEventListener('click', toggleDone);
+document.querySelector('.btn-rem').addEventListener('click', removeDone);
 populateList(tasks, taskList);

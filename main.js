@@ -33,14 +33,19 @@ function toggleDone(e) {
     const index = el.dataset.index;
     tasks[index].done = !tasks[index].done;
     localStorage.setItem('tasks', JSON.stringify(tasks));
-    populateList(tasks, taskList)
+    populateList(tasks, taskList);
 }
 
 function removeDone(e) {
-    console.log(e.target.parentNode);
+    let index = e.target.parentNode.firstElementChild.dataset.index;
+    console.log(index);
+    taskt = tasks.splice(index, 1);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    populateList(tasks, taskList);
 }
 
 addTasks.addEventListener('submit', addTask);
 taskList.addEventListener('click', toggleDone);
-document.querySelector('.btn-rem').addEventListener('click', removeDone);
 populateList(tasks, taskList);
+document.querySelectorAll('.btn-rem').forEach(item =>
+    item.addEventListener('click', removeDone));

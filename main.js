@@ -1,6 +1,7 @@
 const addTasks = document.querySelector('.add-to-do');
 const taskList = document.querySelector('.to-do-list');
-const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+const changeTasks = document.querySelector('.change-to-do');
 
 function addTask(e) {
     e.preventDefault();
@@ -20,7 +21,7 @@ function populateList(plates = [], platesList) {
         return `
         <li>
             <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
-            <label for="item${i}">${plate.text}</label>
+            <label for="item${i}">${plate.text} - pozycja nr ${i}</label>
             <button class="btn-rem">Usuń</button>        
          </li>
         `;
@@ -39,13 +40,23 @@ function toggleDone(e) {
 function removeDone(e) {
     let index = e.target.parentNode.firstElementChild.dataset.index;
     console.log(index);
-    taskt = tasks.splice(index, 1);
+    tasks.splice(index, 1);
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    e.target.parentNode.remove();
+}
+
+function changeTask(e) {
+    e.preventDefault();
+    let changeValueNumber = (document.querySelector('[name=change-to-do-text]').value)
     populateList(tasks, taskList);
 }
 
+
 addTasks.addEventListener('submit', addTask);
 taskList.addEventListener('click', toggleDone);
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn-rem').forEach(item =>
+        item.addEventListener('click', removeDone))
+});
+changeTasks.addEventListener('submit', changeTask);
 populateList(tasks, taskList);
-document.querySelectorAll('.btn-rem').forEach(item =>
-    item.addEventListener('click', removeDone));

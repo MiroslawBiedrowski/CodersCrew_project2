@@ -5,27 +5,28 @@ function addTask(task) {
         task,
         done: false
     });
-    localStorage.setItem('tasks1', JSON.stringify(tasks));
-    console.log(`Aktualnie masz do zrobienia poniższą poniższe rzeczy:`);
-    tasks.forEach((element, index) => {
-        console.log(index, element)
-    });
+    updateLocalStorage();
+    viewTask();
 };
 
 function deleteTask(index) {
     tasks.splice(index, 1);
-    localStorage.setItem('tasks1', JSON.stringify(tasks));
-    console.log(`Aktualnie masz do zrobienia poniższą poniższe rzeczy:`);
+    updateLocalStorage()
+    viewTask();
+};
+
+function toggleTask(index) {
+    tasks[index].done = !tasks[index].done;
+    updateLocalStorage()
+    viewTask();
+};
+
+function viewTask() {
     tasks.forEach((element, index) => {
         console.log(index, element)
     });
 };
 
-function toggleTask(index) {
-    tasks[index].done = !tasks[index].done;
+function updateLocalStorage() {
     localStorage.setItem('tasks1', JSON.stringify(tasks));
-    console.log(`Aktualnie masz do zrobienia poniższą poniższe rzeczy:`);
-    tasks.forEach((element, index) => {
-        console.log(index, element)
-    });
 };

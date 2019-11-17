@@ -12,9 +12,11 @@ function addTask(task) {
 };
 
 function deleteTask(index) {
-    tasks.splice(index, 1);
-    updateLocalStorage()
-    viewTask();
+    if (typeof index == 'number') {
+        tasks.splice(index, 1);
+        updateLocalStorage()
+        viewTask();
+    } else console.log('Podaj numer funkcji, którą chcesz usunąć');
 };
 
 function toggleTask(index) {
@@ -32,3 +34,9 @@ function viewTask() {
 function updateLocalStorage() {
     localStorage.setItem('tasks1', JSON.stringify(tasks));
 };
+
+function aplicationToDo() {
+    return console.log("Witam w mojej aplikacji 'TODO'. Możesz w niej prowadzić spis rzeczy do zrobienia.");
+};
+
+aplicationToDo()

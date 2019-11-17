@@ -26,17 +26,21 @@ function toggleTask(index) {
 };
 
 function viewTask() {
-    tasks.forEach((element, index) => {
-        console.log(index, element)
-    });
+    console.table(tasks);
 };
 
 function updateLocalStorage() {
     localStorage.setItem('tasks1', JSON.stringify(tasks));
 };
 
+function changeTaskName(number, name) {
+    if (typeof name == 'string' && typeof number == 'number') {
+        tasks[number].task = name;
+    } else console.log('Jako pierwszy parametr podaj numer funkcji, jako drugi podaj nową nazwę')
+}
+
 function aplicationToDo() {
-    return console.log("Witam w mojej aplikacji 'TODO'. Możesz w niej prowadzić spis rzeczy do zrobienia.");
+    return console.log("Witam w mojej aplikacji 'TODO'. Możesz w niej prowadzić spis rzeczy do zrobienia. \nAplikacja posiada szereg ciekawych funkcjonalności. \nMożesz użyć poniższych funkcji:\n*viewTask() - wyświetla listę wszystkich dostępnych rzeczy do zrobienia \n*deleteTask(index) - usuwa podaną w par. ()index pozycję z listy \n*toggleTask(index) - podaj numer indekxu jako parametr, a dane zadanie zostanie uznane za wykonane \n*function viewTask() - wyświetla listę wszystkich zadań do wykonania \n*changeTaskName(number, name) - pozwala zmienić nazwę zadania. Jako parametry wymaga podania numeru zadania (number) oraz nowej nazwy zadania (name)");
 };
 
 aplicationToDo()

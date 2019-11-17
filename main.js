@@ -1,12 +1,14 @@
 var tasks = JSON.parse(localStorage.getItem('tasks1')) || [];
 
 function addTask(task) {
-    tasks.push({
-        task,
-        done: false
-    });
-    updateLocalStorage();
-    viewTask();
+    if (typeof task == 'string') {
+        tasks.push({
+            task,
+            done: false
+        });
+        updateLocalStorage();
+        viewTask();
+    } else console.log('Podaj nazwę zadania jako tekst');
 };
 
 function deleteTask(index) {
